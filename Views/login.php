@@ -1,6 +1,9 @@
 <?php 
 
 
+if( isset($_GET['login']) ) { 
+    
+}
 
 
 $titulo = 'Login';
@@ -8,7 +11,9 @@ require '../Templates/header.php';
 ?>
 
 
-<!-- Aqui en medio va el html -->
+<form action="./?login=" method="post">
+    
+</form>
 
 
 <?php

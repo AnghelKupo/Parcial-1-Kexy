@@ -2,7 +2,8 @@
 class AuthController {
 
     public function login($email, $pass) {
-        
+
+        exit;
     }
 
 
