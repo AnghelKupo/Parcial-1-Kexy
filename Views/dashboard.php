@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body>
-    
-</body>
-</html>
+<?php 
+
+
+
+
+$titulo = 'Tus notas';
+require '../Templates/header.php'; 
+?>
+
+
+<!-- Aqui en medio va el html -->
+
+
+<?php
+require '../Templates/footer.php'; 
+?>

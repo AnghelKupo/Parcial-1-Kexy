@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-<body>
+<?php 
+
+
+
+
+$titulo = 'Registro';
+require '../Templates/header.php'; 
+?>
     
-</body>
-</html>
+
+<!-- Aqui en medio va el html -->
+
+
+<?php
+require '../Templates/footer.php'; 
+?>

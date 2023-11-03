@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="./Public/js/tailwind.js"></script>
-
+    
     <title>Index</title>
 </head>
-<body>
+<body class="h-screen bg-cover bg-no-repeat bg-[url('./Public/fondo.jpg')]">
     
 </body>
 </html>

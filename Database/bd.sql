@@ -22,3 +22,7 @@ CREATE TABLE Notes (
     user_id INT,
     FOREIGN KEY (user_id) REFERENCES Users(id_user)
 );
+
+CREATE USER 'ds72023'@'localhost' IDENTIFIED BY 'ds72023';
+
+GRANT ALL PRIVILEGES ON *.* TO 'ds72023'@'localhost' WITH GRANT OPTION;

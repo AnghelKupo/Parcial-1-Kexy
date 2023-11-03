@@ -3,7 +3,7 @@
 
 
 
-$titulo = 'Login';
+$titulo = 'Agregar nota';
 require '../Templates/header.php'; 
 ?>
 
