@@ -64,5 +64,14 @@ class User {
         $this->role = $role;
     }
 
+    public function fromArray($resultArray) {
+        $this->id_user = $resultArray['id_user'] ?? null;
+        $this->email = $resultArray['email'] ?? null;
+        $this->pass = $resultArray['pass'] ?? null;
+        $this->pic = $resultArray['pic'] ?? null;
+        $this->name = $resultArray['name'] ?? null;
+        $this->last_name = $resultArray['last_name'] ?? null;
+        $this->role = $resultArray['role'] ?? null;
+    }
 
 }
