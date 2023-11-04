@@ -59,30 +59,31 @@ class UserRepository {
         }
     }
 
-    public function updateUserById($id_user, array $data): array {
+    public function updateUserById($id_user, array $data): bool {
         $connection = ConnectionDB::getInstance()->getConnection();
         $users = [];
-        $sql = "SELECT * FROM users WHERE id_user = '$id_user'";
+        $sql = "UPDATE users SET VALUES name = :name, last_name = :last_name, email :email WHERE id_user = :id_user";
+        
         try {
             $stmt = $connection->prepare($sql);
-            $stmt->bindParam(':id_user', $id_user);
-            $stmt->execute();
-            
-            if($stmt->rowCount() > 0) {
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                foreach($result as $row) {
-                    $user = new User();
-                    $user->fromArray($row);
-                    array_push($users, $user);
-                }
+
+            $stmt->bindParam("id_user", $id_user, PDO::PARAM_INT);
+            $stmt->bindParam("name", $data["name"], PDO::PARAM_STR);
+            $stmt->bindParam("email", $data["email"], PDO::PARAM_STR);
+            $stmt->bindParam("last_name", $data["last_name"], PDO::PARAM_STR);
+
+            if( $stmt->execute()){
+                echo"ACTUALIZACIÓN EXISTOSA";
+                return true;
+
+            }else{
+                echo "FALLO AL ACTUALIZAR LOS DATOS";
+                return false;
             }
-
-            return $users;
         } catch (\Throwable $th) {
-            echo $th->getMessage();
-            return [];
+            echo  $th->getMessage();
+            return false;
         }
-
     }
 
     public function insertUser(array $data): bool {
@@ -117,7 +118,23 @@ class UserRepository {
     }
 
     public function deleteUserById(int $id_user): bool {
-        return false;  
-    }
+        $connection = ConnectionDB::getInstance()->getConnection();
+        $sql = "DELETE FROM users WHERE id_user = :id_user";
 
+        try {
+            $stmt = $connection->prepare($sql);
+            $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+    
+            if ($stmt->execute()) {
+                echo "ELIMINACIÓN EXITOSA";
+                return true;
+            } else {
+                echo "ERRO AL ELIMINAR"; 
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo  $e->getMessage(); // Manejo de excepciones
+            return false;
+        }
+    }
 }
