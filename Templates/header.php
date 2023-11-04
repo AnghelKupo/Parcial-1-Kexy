@@ -9,3 +9,9 @@
     <title><?= $titulo; ?></title>
 </head>
 <body class="h-screen bg-cover bg-no-repeat bg-[url('../Public/fondo.jpg')]">
+
+<style>
+    * {
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
