@@ -4,7 +4,7 @@ class Note {
     private $title;
     private $description;
     private $date;
-    private $user_id;
+    private User $user;
 
     public function getId() {
         return $this->id_note;
@@ -22,8 +22,8 @@ class Note {
         return $this->date;
     }
 
-    public function getUserId() {
-        return $this->user_id;
+    public function getUser() {
+        return $this->user;
     }
 
     public function setIdNode($id_note) {
@@ -42,8 +42,19 @@ class Note {
         $this->date = $date;
     }
 
-    public function setUserId($user_id) {
-        $this->user_id = $user_id;
+    public function setUser(User $user) {
+        $this->user = $user;
+    }
+
+    public function fromArray(array $resultArray) {
+        $this->id_note = $resultArray['id_note'] ?? null;
+        $this->title = $resultArray['title'] ?? null;
+        $this->description = $resultArray['description'] ?? null;
+        $this->date = $resultArray['date'] ?? null;
+        
+        $this->user = new User();
+        $this->user->setName($resultArray['name']) ?? null;
+        $this->user->setLastName($resultArray['last_name']) ?? null;
     }
     
 }
