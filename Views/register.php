@@ -45,9 +45,9 @@ require '../Templates/footer.php';
             <div class="w-full h-full flex flex-col  justify-center items-center " >
                 <h2 class="mt-[2rem] text-center text-purple-400 text-3xl font-light tracking-[5.08px]">REGISTRARSE</h2>
                 <?php 
-                    if(isset($_GET['error'])) {
+                    if(isset($_GET['msj'])) {
 
-                        echo "<h1>" . $_GET['error'] . "</h1>";
+                        echo "<h1 class=' mt-[2rem] text-center text-purple-900 text-xl font-light tracking-[5.08px]'>" . $_GET['msj'] . "</h1>";
                     }
                 ?>
                 <img src="../Public/perfil.jpg" alt="Foto de Perfil" class="rounded-full w-[20%] h-[20%] border-purple-300 border-4 shadow-lg" >
@@ -57,7 +57,7 @@ require '../Templates/footer.php';
                 <input type="text"placeholder="Apellido" name="last_name" class="text-center h-[40px] mt-3 w-96 items-center rounded-3xl pl-3 py-3 outline-none focus:ring-1 focus:ring-purple-800 transition-shadow delay-200 text-purple-800 bg-opacity-40 bg-stone-50">
 
                 <button class="mt-[20px] tracking-[3px] block px-4 py-2 text-slate-100 font-regular bg-gradient-to-r from-purple-400 to-teal-200 text-lg rounded-3xl">INGRESAR</button>
-                <a href="register.php" class="mt-[35px] text-purple-500 text-md underline">Ya tienes cuenta? Inicia Sesión Aquí</a>
+                <a href="login.php" class="mt-[35px] text-purple-500 text-md underline">Ya tienes cuenta? Inicia Sesión Aquí</a>
             </div> 
         </section>
     </div>
