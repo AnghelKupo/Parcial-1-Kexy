@@ -4,11 +4,11 @@ require_once '../Config/ConnectionDB.php';
 
 class UserRepository {
 
-    public function getByEmailPass($email, $pass): User | bool {/*Que pasa si en vez de null lo pongo boleano? afecto?  */
+    public function getByEmailPass($email, $pass): User | null {/*Que pasa si en vez de null lo pongo boleano? afecto?  */
         
         $connection = ConnectionDB::getInstance()->getConnection();
         $sql = "SELECT * FROM users WHERE email = :email";
-        $user = false;
+        $user = null;
 
         try {
 
@@ -24,13 +24,13 @@ class UserRepository {
 
                 if(!password_verify($pass, $user->getPass())) {
                     echo "Datos Incorrectos";
-                    return false;
+                    return null;
                 }
             }
             return $user;
         } catch (PDOException $e) {
             echo $e->getMessage();
-            return false;
+            return null;
         }
 
     }
@@ -62,7 +62,7 @@ class UserRepository {
     public function updateUserById($id_user, array $data): bool {
         $connection = ConnectionDB::getInstance()->getConnection();
         $users = [];
-        $sql = "UPDATE users SET VALUES name = :name, last_name = :last_name, email :email WHERE id_user = :id_user";
+        $sql = "UPDATE users SET name = :name, last_name = :last_name, email = :email WHERE id_user = :id_user";
         
         try {
             $stmt = $connection->prepare($sql);
