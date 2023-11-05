@@ -70,7 +70,7 @@
         class="bg-purple-300 bg-opacity-40 border-2 border-fuchsia-100 backdrop-blur-xl p-4 rounded-3xl w-[800px]" 
         method="post">
 
-        <h2 class="text-purple-950 text-center text-xl">
+        <h2 class=" text-purple-950 text-center text-xl">
             <?= ($edicionMode) ? 'Modificar: '.$currentNote->getTitle() : 'Agregar nueva nota' ?>
         </h2>
 

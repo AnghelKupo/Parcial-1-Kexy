@@ -47,7 +47,7 @@ require '../Templates/footer.php';
                 <?php 
                     if(isset($_GET['msj'])) {
 
-                        echo "<h1 class=' mt-[2rem] text-center text-purple-900 text-xl font-light tracking-[5.08px]'>" . $_GET['msj'] . "</h1>";
+                        echo "<h1 class='mt-[2rem] text-center text-purple-900 text-xl font-light tracking-[5.08px]'>" . $_GET['msj'] . "</h1>";
                     }
                 ?>
                 <img src="../Public/perfil.jpg" alt="Foto de Perfil" class="rounded-full w-[20%] h-[20%] border-purple-300 border-4 shadow-lg" >

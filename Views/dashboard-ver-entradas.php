@@ -8,7 +8,7 @@
     // =========================
 
     if( !isset($_SESSION['user']) ) {
-        echo 'Acceso denegado, serás redirigido en 3 segundos...';
+        echo ' Acceso denegado, serás redirigido en 3 segundos...';
         header('refresh:3;url=login.php');
         exit; 
     }

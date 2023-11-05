@@ -32,7 +32,7 @@ require '../Templates/header.php';
     <form action="./login.php?login=" method="post" class=" flex flex-col justify-center items-center h-screen">
         <section class=" w-[600.00px] h-[550.00px] shadow-lg border-1  rounded-[60px] bg-opacity-[0.5px] bg-purple-300  border-[1px] border-white backdrop-blur-[4px]">
             <div class="relative">
-                <a href="../index.php" class="absolute mx-[30px] mt-[20px] w-[60.00px] h-[40.00px] block px-4 py-2 bg-purple-400 rounded-[30px] "></a>
+                <a href="../index.php"  class="absolute mx-[30px] mt-[20px] w-[60.00px] h-[40.00px] block px-4 py-2 bg-purple-400 rounded-[30px] "></a>
                 <img src="../Public./arrow-icon.png" alt="" class="absolute w-[40px] h-[40px]  mx-[35px] mt-[20px]">
             </div>
 

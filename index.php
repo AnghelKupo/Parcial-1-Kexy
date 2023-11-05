@@ -6,7 +6,7 @@
 
     <script src="./Public/js/tailwind.js"></script>
     
-    <title>Index</title>
+    <title>Index </title>
 </head>
     <body class="flex justify-center items-center h-screen bg-cover bg-no-repeat bg-[url('./Public/fondo.jpg')]">
     <style>

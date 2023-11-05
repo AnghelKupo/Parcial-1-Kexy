@@ -34,7 +34,7 @@
             <h2 class="text-xl text-purple-950">Usuarios</h2>
             <table>
                 <tr class="bg-purple-500  ">
-                    <th class="border-8 border-purple-500 p-2 text-start text-white">Foto</th>
+                    <th class=" border-8 border-purple-500 p-2 text-start text-white">Foto</th>
                     <th class="border-8 border-purple-500 p-2 text-start text-white">Nombre <span class="text-cyan-500">Editable</span></th>
                     <th class="border-8 border-purple-500 p-2 text-start text-white">Apellido <span class="text-cyan-500">Editable</span></th>
                     <th class="border-8 border-purple-500 p-2 text-start text-white">Email <span class="text-cyan-500">Editable</span></th>

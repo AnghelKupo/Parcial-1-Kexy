@@ -52,7 +52,7 @@
 <main class="flex-col ml-[224px] p-24 flex justify-center" style="width: calc(100vw - 224px);">
 
     <div class="flex flex-col items-center bg-purple-300 bg-opacity-40 border-2 border-fuchsia-100 backdrop-blur-xl p-4 rounded-3xl w-[800px]">   
-        <form enctype="multipart/form-data" action="./dashboard-config.php?editar_foto=" class="" method="post">
+        <form enctype=" multipart/form-data" action="./dashboard-config.php?editar_foto=" class="" method="post">
             <input type="file" name="pic" id="">
             <button class="block px-4 py-2 text-slate-100 text-lg rounded-3xl mx-auto mt-[40px] tracking-[3px] block px-4 py-2 text-slate-100 font-regular bg-gradient-to-r from-purple-400 to-teal-200 text-lg rounded-3xl" type="submit">Subir foto</button>
         </form>
