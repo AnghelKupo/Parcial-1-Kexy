@@ -54,20 +54,17 @@
 
         }
 
-        public function  pic($id_user, array $data){
+        public function pic($id_user, array $data){
             $userRepository = new UserRepository();
-            if ($userRepository->insertPic($id_user,$data)) {
-
+            
+            if ($userRepository->insertPic($id_user, $data)) {
                 $user = $userRepository->getById($id_user);
-
-                $_SESSION['user'] = serialize( $user );
-                header("refresh:0, url=dashboard.php?=");
-                
-            }else{
+                $_SESSION['user'] = serialize($user);
+                header("Location: dashboard.php");
+            } else {
                 $msj = "Los datos no se pudieron actualizar";
-                header("refresh:0, url=dashboard.php?msj=$msj");
+                header("Location: dashboard.php?msj=$msj");
             }
-
         }
     }
 ?>

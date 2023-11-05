@@ -1,7 +1,7 @@
 <aside class="w-56 h-screen bg-purple-300 bg-opacity-40 border-2 border-fuchsia-100 backdrop-blur-xl text-purple-500 fixed"> 
     <figure class="flex justify-center mt-6">
         <?php if(!is_null($foto)) { ?>
-        <img src="data:image/jpeg;base64,<?= $foto; ?>" alt="Perfil" class="rounded-full w-32 h-32 ring-purple-400 ring-8">
+        <img src="data:image/jpeg;base64,<?= base64_encode($foto); ?>" alt="Perfil" class="rounded-full w-32 h-32 ring-purple-400 ring-8">
         <?php } else { ?>
         <img src="../Public/perfil.jpg" alt="Perfil" class="rounded-full w-32 h-32 ring-purple-400 ring-8">
         <?php } ?>
