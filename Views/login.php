@@ -2,7 +2,7 @@
 
 require_once '../Models/User.php';
 require_once '../Controllers/AuthController.php';
-$controllerUser = new AuthController();
+$authController = new AuthController();
 
 if( isset($_GET['login']) ) { 
     if (isset($_POST['email']) && isset($_POST['pass'])) {

@@ -15,7 +15,6 @@
     $userRepository = new UserRepository();
     $noteRepository = new NoteRepository();
 
-
     $titulo = 'Tus notas';
     require_once '../Templates/header.php'; 
 
