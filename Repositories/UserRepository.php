@@ -59,6 +59,28 @@ class UserRepository {
         }
     }
 
+    public function getById($id_user): User | null{
+        $connection = ConnectionDB::getInstance()->getConnection();
+        $user = null;
+        $sql = "SELECT * FROM Users WHERE id_user = $id_user";
+
+        try {
+            $query = $connection->query($sql);
+
+            if ($query->rowCount() > 0) {
+                $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                $user = New User();
+                $user->fromArray($results[0]);
+            }
+            return $user;
+
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            return null;
+        }
+    }
+
+
     public function updateUserById($id_user, array $data): bool {
         $connection = ConnectionDB::getInstance()->getConnection();
         $users = [];
@@ -97,6 +119,29 @@ class UserRepository {
             $stmt->bindParam("pass", $hash_password);
             $stmt->bindParam("name", $data["name"]);
             $stmt->bindParam("last_name", $data["last_name"]);
+
+            if ($stmt->execute()) {
+                return true;
+            }
+            return false;
+
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            return false;
+        }
+
+    }
+
+    public function insertPic( $id_user,array $data): bool {
+        $connection = ConnectionDB::getInstance()->getConnection();
+        $sql = "UPDATE users SET pic = :pic WHERE id_user = :id_user";
+
+        try {
+            $stmt = $connection->prepare($sql);
+
+            $stmt->bindParam(":pic", $data["pic"], PDO::PARAM_LOB);
+            $stmt->bindParam(":id_user", $id_user, PDO::PARAM_INT);
+
 
             if ($stmt->execute()) {
                 return true;
