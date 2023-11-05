@@ -25,7 +25,7 @@
         public function register(array $data) {
             $userRepository = new UserRepository();
             if ($userRepository->insertUser($data)) {
-                $msj = "Insercion exitosa";
+                $msj = "Registro exitosa";
                 header("refresh:0, url=login.php?msj=$msj");
             } else {
 
