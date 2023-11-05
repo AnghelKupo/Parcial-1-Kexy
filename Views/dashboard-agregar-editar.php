@@ -4,6 +4,7 @@
     require_once '../Models/Note.php';
     require_once '../Controllers/NoteController.php';
     require_once '../Repositories/NoteRepository.php';
+    require_once '../Controllers/AuthController.php';
 
 
     if( !isset($_SESSION['user']) ) {
@@ -99,6 +100,7 @@
     </form>
 
 </main>
+
 
 
 <?php

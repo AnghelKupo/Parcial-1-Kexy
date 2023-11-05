@@ -3,6 +3,7 @@
     require_once '../Models/User.php';
     require_once '../Models/Note.php';
     require_once '../Repositories/NoteRepository.php';
+    require_once '../Controllers/AuthController.php';
 
     // =========================
 
@@ -53,7 +54,7 @@
                 echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getTitle()."</td>";
                 echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getUser()->getName().' '.$note->getUser()->getLastName()."</td>";
                 echo "<td class='border-8 border-purple-500 p-2 text-start'>";
-                echo "<button onclick='deleteNote(".$note->getId().")' class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>E</button>";
+                echo "<button onclick='deleteNote(".$note->getId().")' class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>🗑</button>";
                 echo "</td>";
                 echo "</tr>";
             }

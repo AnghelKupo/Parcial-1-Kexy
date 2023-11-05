@@ -83,7 +83,6 @@ class UserRepository {
 
     public function updateUserById($id_user, array $data): bool {
         $connection = ConnectionDB::getInstance()->getConnection();
-        $users = [];
         $sql = "UPDATE users SET name = :name, last_name = :last_name, email = :email WHERE id_user = :id_user";
         
         try {
@@ -95,11 +94,8 @@ class UserRepository {
             $stmt->bindParam("last_name", $data["last_name"], PDO::PARAM_STR);
 
             if( $stmt->execute()){
-                echo"ACTUALIZACIÓN EXISTOSA";
                 return true;
-
             }else{
-                echo "FALLO AL ACTUALIZAR LOS DATOS";
                 return false;
             }
         } catch (\Throwable $th) {

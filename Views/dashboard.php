@@ -3,6 +3,7 @@
     require_once '../Models/User.php';
     require_once '../Repositories/UserRepository.php';
     require_once '../Repositories/NoteRepository.php';
+    require_once '../Controllers/AuthController.php';
 
     if( !isset($_SESSION['user']) ) {
         echo 'Acceso denegado, serás redirigido en 3 segundos...';
@@ -14,8 +15,6 @@
 
     $userRepository = new UserRepository();
     $noteRepository = new NoteRepository();
-
-
 
     $titulo = 'Tus notas';
     require_once '../Templates/header.php'; 
@@ -38,7 +37,7 @@
                     <th class="border-8 border-purple-500 p-2 text-start">Foto</th>
                     <th class="border-8 border-purple-500 p-2 text-start">Nombre <span class="text-cyan-500">Editable</span></th>
                     <th class="border-8 border-purple-500 p-2 text-start">Apellido <span class="text-cyan-500">Editable</span></th>
-                    <th class="border-8 border-purple-500 p-2 text-start">Email</th>
+                    <th class="border-8 border-purple-500 p-2 text-start">Email <span class="text-cyan-500">Editable</span></th>
                     <th class="border-8 border-purple-500 p-2 text-start">Número de notas</th>
                     <th class="border-8 border-purple-500 p-2 text-start">Acciones</th>
                 </tr>
@@ -57,9 +56,9 @@
 
                     $editable = $user->getRole() != 'admin';
 
-                    echo "<td class='border-8 border-purple-500 p-2 text-start' contenteditable>".$user->getName()."</td>";
-                    echo "<td class='border-8 border-purple-500 p-2 text-start' contenteditable>".$user->getLastName()."</td>";
-                    echo "<td class='border-8 border-purple-500 p-2 text-start' contenteditable>".$user->getEmail()."</td>";
+                    echo "<td id='".$user->getIdUser()."-name'  class='border-8 border-purple-500 p-2 text-start' contenteditable>".$user->getName()."</td>";
+                    echo "<td id='".$user->getIdUser()."-last_name' class='border-8 border-purple-500 p-2 text-start' contenteditable>".$user->getLastName()."</td>";
+                    echo "<td id='".$user->getIdUser()."-email' class='border-8 border-purple-500 p-2 text-start' contenteditable>".$user->getEmail()."</td>";
 
                     $notes = $noteRepository->getAllByUserId( $user->getIdUser() );
                     echo "<td class='border-8 border-purple-500 p-2 text-start'>".count($notes)."</td>";
@@ -67,8 +66,9 @@
                     echo "<td class='border-8 border-purple-500 p-2 text-start'>";
 
                     if($editable) {
-                        echo "<button class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>M</button>";
-                        echo "<button class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>E</button>";
+                        $id = $user->getIdUser();
+                        echo "<button onclick='updateUser($id)' class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>🖊</button>";
+                        echo "<button onclick='deleteUser($id)'  class='w-8 h-8 text-slate-100 font-bold ml-2 bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>🗑</button>";
                     }
                     echo "</td>";
                     echo "</tr>";
@@ -99,8 +99,8 @@
                     echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getTitle()."</td>";
                     echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getDescription()."</td>";
                     echo "<td class='border-8 border-purple-500 p-2 text-start'>";
-                    echo "<button class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'><a href='./dashboard-agregar-editar.php?editar=".$note->getId()."'>M</a></button>";
-                    echo "<button class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>E</button>";
+                    echo "<button class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'><a href='./dashboard-agregar-editar.php?editar=".$note->getId()."'>🖊</a></button>";
+                    echo "<button class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>🗑</button>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -113,6 +113,7 @@
     <?php } ?>
 </main>
 
+<script src="../Public/js/update-delete-user.js"></script>
 
 <?php
 require '../Templates/footer.php'; 
