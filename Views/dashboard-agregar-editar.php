@@ -2,11 +2,20 @@
 session_start();
 require_once '../Models/User.php';
 require_once '../Models/Note.php';
+require_once '../Controllers/NoteController.php';
+require_once '../Repositories/NoteRepository.php';
+
+// ===============
 
 if( !isset($_SESSION['user']) ) { }
 
 $user = new User();
-$user->setRole('admin');
+$user->setRole('user');
+$user->setIdUser(1);
+
+// ===============
+
+$noteController = new NoteController();
 
 $edicionMode = false;
 
@@ -15,17 +24,25 @@ $currentNote = null;
 if( isset($_GET['editar']) ) {
     $edicionMode = true;
     $id_note = $_GET['editar'];
-    $currentNote = new Note();
-    $currentNote->setTitle('Hacer la tarea');
-
+    $currentNote = $noteController->getNote($user->getIdUser(), $id_note);
 }
 
 if( isset($_GET['do_edicion']) ) {
-
+    $id_note = $_POST['id_note'];
+    $data = [
+        'title' => $_POST['title'],
+        'description' => $_POST['description'],
+    ];
+    $noteController->updateNote($id_note, $data);
 }
 
 if( isset($_GET['agregar']) ) {
-
+    
+    $data = [
+        'title' => $_POST['title'],
+        'description' => $_POST['description'],
+    ];
+    $noteController->postNote($user->getIdUser(), $data);
 }
 
 
@@ -37,8 +54,7 @@ if( $user->getRole() == 'admin') {
 
 $titulo = 'Tus notas';
 require_once '../Templates/header.php'; 
-
-$foto = null;
+$foto = $user->getPic();
 $nombre = $user->getName() . ' ' . $user->getLastName();
 $rol = $user->getRole();
 $link = 2;
@@ -60,14 +76,21 @@ require_once '../Templates/sidebar.php'
         <input 
             type="text" 
             name="title" 
+            required
+            value="<?= ($currentNote) ? $currentNote->getTitle() : '' ?>"
             placeholder="Titulo de la tarea" 
             class="rounded-3xl pl-3 py-3 outline-none focus:ring-1 focus:ring-purple-600 transition-shadow delay-200 text-purple-950 w-full mb-4">
         
         <textarea 
             name="description" 
             placeholder="Descripción de la tarea"
-            class="rounded-3xl pl-3 py-3 outline-none focus:ring-1 focus:ring-purple-600 transition-shadow delay-200 text-purple-950 h-44 w-full resize-none content-none">
-        </textarea>
+            required
+            class="rounded-3xl pl-3 py-3 outline-none focus:ring-1 focus:ring-purple-600 transition-shadow delay-200 text-purple-950 h-44 w-full resize-none content-none"><?= ($currentNote) ? $currentNote->getDescription() : '' ?></textarea>
+
+        <input 
+            type="number" 
+            name="id_note" 
+            hidden value="<?= ($currentNote) ? $currentNote->getId() : '' ?>">
 
         <button class="block px-4 py-2 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-3xl mx-auto" type="submit">
             <?= ($edicionMode) ? 'Guardar cambios' : 'Agregar' ?>

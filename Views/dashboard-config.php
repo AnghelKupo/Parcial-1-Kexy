@@ -10,7 +10,7 @@ if( !isset($_SESSION['user']) ) {
 
 /* $user = unserialize( $_SESSION['user'] ); */
 $user = new User();
-$user->setRole('admin');
+$user->setRole('user');
 $user->setName('Flavio');
 $user->setLastName('Sánchez');
 $user->setEmail('test@test.com');
@@ -60,7 +60,6 @@ require_once '../Templates/sidebar.php'
     </form>
 
 </main>
-
 
 <?php
 require '../Templates/footer.php'; 
