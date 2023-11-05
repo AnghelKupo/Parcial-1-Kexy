@@ -93,7 +93,7 @@
             name="id_note" 
             hidden value="<?= ($currentNote) ? $currentNote->getId() : '' ?>">
 
-        <button class="block px-4 py-2 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-3xl mx-auto" type="submit">
+        <button class="block px-4 py-2 text-slate-100 text-lg rounded-3xl mx-auto mt-[40px] tracking-[3px] block px-4 py-2 text-slate-100 font-regular bg-gradient-to-r from-purple-400 to-teal-200 text-lg rounded-3xl" type="submit">
             <?= ($edicionMode) ? 'Guardar cambios' : 'Agregar' ?>
         </button>
 

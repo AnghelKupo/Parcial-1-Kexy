@@ -33,20 +33,20 @@
         <section class="bg-purple-300 bg-opacity-40 border-2 border-fuchsia-100 backdrop-blur-xl p-4 rounded-3xl">
             <h2 class="text-xl text-purple-950">Usuarios</h2>
             <table>
-                <tr class="bg-purple-500">
-                    <th class="border-8 border-purple-500 p-2 text-start">Foto</th>
-                    <th class="border-8 border-purple-500 p-2 text-start">Nombre <span class="text-cyan-500">Editable</span></th>
-                    <th class="border-8 border-purple-500 p-2 text-start">Apellido <span class="text-cyan-500">Editable</span></th>
-                    <th class="border-8 border-purple-500 p-2 text-start">Email <span class="text-cyan-500">Editable</span></th>
-                    <th class="border-8 border-purple-500 p-2 text-start">Número de notas</th>
-                    <th class="border-8 border-purple-500 p-2 text-start">Acciones</th>
+                <tr class="bg-purple-500  ">
+                    <th class="border-8 border-purple-500 p-2 text-start text-white">Foto</th>
+                    <th class="border-8 border-purple-500 p-2 text-start text-white">Nombre <span class="text-cyan-500">Editable</span></th>
+                    <th class="border-8 border-purple-500 p-2 text-start text-white">Apellido <span class="text-cyan-500">Editable</span></th>
+                    <th class="border-8 border-purple-500 p-2 text-start text-white">Email <span class="text-cyan-500">Editable</span></th>
+                    <th class="border-8 border-purple-500 p-2 text-start text-white">Número de notas</th>
+                    <th class="border-8 border-purple-500 p-2 text-start text-white">Acciones</th>
                 </tr>
                 <?php
                 $users = $userRepository->getAll();
 
                 foreach( $users as $user ) {
-                    echo "<tr class='bg-purple-200 bg-opacity-50 backdrop-blur-lg'>";
-                    echo "<td class='border-8 border-purple-500 p-2 text-start'>";
+                    echo "<tr class='bg-purple-200  bg-opacity-50 backdrop-blur-lg'>";
+                    echo "<td class='border-8  border-purple-500 p-2 text-start'>";
                     if(!is_null($user->getPic())) { 
                         echo "<img src='data:image/jpeg;base64,". base64_encode($user->getPic()) ."' alt='Perfil' class='rounded-full w-12 h-12 ring-purple-400 ring-8'>";
                     } else { 
@@ -80,15 +80,15 @@
 
     <?php } else { ?>
 
-        <section class="bg-purple-300 bg-opacity-40 border-2 border-fuchsia-100 backdrop-blur-xl p-4 rounded-3xl">
+        <section class="bg-purple-300 bg-opacity-40 border-2 border-fuchsia-100 backdrop-blur-[26px] p-4 rounded-3xl">
 
             <h2 class="text-xl text-purple-950">Notas</h2>   
             <table>
                 <tr class="bg-purple-500">
-                    <th class="border-8 border-purple-500 p-2 text-start">Fecha</th>
-                    <th class="border-8 border-purple-500 p-2 text-start">Titulo</th>
-                    <th class="border-8 border-purple-500 p-2 text-start">Contenido</th>
-                    <th class="border-8 border-purple-500 p-2 text-start">Acciones</th>
+                    <th class="border-8 border-purple-500 p-2 text-start text-white">Fecha</th>
+                    <th class="border-8 border-purple-500 p-2 text-start text-white">Titulo</th>
+                    <th class="border-8 border-purple-500 p-2 text-start text-white">Contenido</th>
+                    <th class="border-8 border-purple-500 p-2 text-start text-white">Acciones</th>
                 </tr>
                 <?php
                 $notes = $noteRepository->getAllByUserId( $user->getIdUser() );

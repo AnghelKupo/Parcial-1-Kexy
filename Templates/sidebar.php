@@ -7,7 +7,7 @@
         <?php } ?>
     </figure>
 
-    <h2 class="text-lg font-bold text-center mt-4"><?= $nombre; ?></h2>
+    <h2 class="text-xl font-lg text-center mt-4"><?= $nombre; ?></h2>
     <h3 class="text-center mb-4"><?= $rol; ?></h3>
 
     <ul class="mt-4">

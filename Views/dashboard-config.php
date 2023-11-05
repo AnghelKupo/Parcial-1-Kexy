@@ -49,12 +49,12 @@
 ?>
 
 
-<main class="flex-col ml-[224px] p-4 flex justify-center" style="width: calc(100vw - 224px);">
+<main class="flex-col ml-[224px] p-24 flex justify-center" style="width: calc(100vw - 224px);">
 
-    <div class="bg-purple-300 bg-opacity-40 border-2 border-fuchsia-100 backdrop-blur-xl p-4 rounded-3xl w-[800px]">   
+    <div class="flex flex-col items-center bg-purple-300 bg-opacity-40 border-2 border-fuchsia-100 backdrop-blur-xl p-4 rounded-3xl w-[800px]">   
         <form enctype="multipart/form-data" action="./dashboard-config.php?editar_foto=" class="" method="post">
             <input type="file" name="pic" id="">
-            <button class="block px-4 py-2 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-3xl mx-auto" type="submit">Subir foto</button>
+            <button class="block px-4 py-2 text-slate-100 text-lg rounded-3xl mx-auto mt-[40px] tracking-[3px] block px-4 py-2 text-slate-100 font-regular bg-gradient-to-r from-purple-400 to-teal-200 text-lg rounded-3xl" type="submit">Subir foto</button>
         </form>
 
         <form action="./dashboard-config.php?editar_datos="  method="post">
@@ -82,7 +82,7 @@
                 value="<?= $user->getEmail() ?>"
                 class="rounded-3xl pl-3 py-3 outline-none focus:ring-1 focus:ring-purple-600 transition-shadow delay-200 text-purple-950 w-full mb-4">
 
-            <button  class="block px-4 py-2 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-3xl mx-auto" type="submit">
+            <button  class="block px-4 py-2 text-slate-100 text-lg rounded-3xl mx-auto mt-[40px] tracking-[3px] block px-4 py-2 text-slate-100 font-regular bg-gradient-to-r from-purple-400 to-teal-200 text-lg rounded-3xl" type="submit">
                 Guardar cambios
             </button>
         
