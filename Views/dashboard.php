@@ -3,6 +3,7 @@
     require_once '../Models/User.php';
     require_once '../Repositories/UserRepository.php';
     require_once '../Repositories/NoteRepository.php';
+    require_once '../Controllers/AuthController.php';
 
     if( !isset($_SESSION['user']) ) {
         echo 'Acceso denegado, serás redirigido en 3 segundos...';

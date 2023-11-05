@@ -29,5 +29,10 @@
                 <p>Configurar datos</p>
             </a>
         </li>
+        <li>
+            <a href="./cerrar.php" class="flex gap-2 <?= ($link == 3) ? 'bg-purple-400 p-2 text-purple-200' : '' ?>">
+                <p>Cerrar sesión</p>
+            </a>
+        </li>
     </ul>
 </aside>

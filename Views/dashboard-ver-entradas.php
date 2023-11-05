@@ -3,6 +3,7 @@
     require_once '../Models/User.php';
     require_once '../Models/Note.php';
     require_once '../Repositories/NoteRepository.php';
+    require_once '../Controllers/AuthController.php';
 
     // =========================
 
