@@ -1,38 +1,35 @@
 <?php 
-session_start();
-require_once '../Models/User.php';
-require_once '../Models/Note.php';
-require_once '../Repositories/NoteRepository.php';
+    session_start();
+    require_once '../Models/User.php';
+    require_once '../Models/Note.php';
+    require_once '../Repositories/NoteRepository.php';
 
-// =========================
+    // =========================
 
-if( !isset($_SESSION['user']) ) {
-    /* echo 'Acceso denegado, serás redirigido en 3 segundos...';
-    header('refresh:3;url=login.php');
-    exit; */
-}
+    if( !isset($_SESSION['user']) ) {
+        echo 'Acceso denegado, serás redirigido en 3 segundos...';
+        header('refresh:3;url=login.php');
+        exit; 
+    }
 
-/* $user = unserialize( $_SESSION['user'] ); */
-$user = new User();
-$user->setRole('admin');
-$user->setName('Flavio');
-$user->setLastName('Sánchez');
+    $user = unserialize( $_SESSION['user'] );
 
-// =========================
 
-if( $user->getRole() != 'admin') {
-    header('refresh:0;url=dashboard.php');
-    exit();
-}
+    // =========================
 
-$titulo = 'Nuvas entradas';
-require_once '../Templates/header.php'; 
+    if( $user->getRole() != 'admin') {
+        header('refresh:0;url=dashboard.php');
+        exit();
+    }
 
-$foto = null;
-$nombre = $user->getName() . ' ' . $user->getLastName();
-$rol = $user->getRole();
-$link = 2;
-require_once '../Templates/sidebar.php'
+    $titulo = 'Nuvas entradas';
+    require_once '../Templates/header.php'; 
+
+    $foto =$user->getPic();
+    $nombre = $user->getName() . ' ' . $user->getLastName();
+    $rol = $user->getRole();
+    $link = 2;
+    require_once '../Templates/sidebar.php'
 ?>
 
 
@@ -53,8 +50,8 @@ require_once '../Templates/sidebar.php'
             foreach( $notes as $note ) {
                 echo "<tr class='bg-purple-200 bg-opacity-50 backdrop-blur-lg'>";
                 echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getDate()."</td>";
-                echo "<td class='border-8 border-purple-500 p-2 text-start' contenteditable='true'>".$note->getTitle()."</td>";
-                echo "<td class='border-8 border-purple-500 p-2 text-start' contenteditable='true'>".$note->getUser()->getName().' '.$note->getUser()->getLastName()."</td>";
+                echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getTitle()."</td>";
+                echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getUser()->getName().' '.$note->getUser()->getLastName()."</td>";
                 echo "<td class='border-8 border-purple-500 p-2 text-start'>";
                 echo "<button onclick='deleteNote(".$note->getId().")' class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>E</button>";
                 echo "</td>";

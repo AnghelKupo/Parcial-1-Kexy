@@ -1,64 +1,64 @@
 <?php 
-session_start();
-require_once '../Models/User.php';
-require_once '../Models/Note.php';
-require_once '../Controllers/NoteController.php';
-require_once '../Repositories/NoteRepository.php';
-
-// ===============
-
-if( !isset($_SESSION['user']) ) { }
-
-$user = new User();
-$user->setRole('user');
-$user->setIdUser(1);
-
-// ===============
-
-$noteController = new NoteController();
-
-$edicionMode = false;
-
-$currentNote = null;
-
-if( isset($_GET['editar']) ) {
-    $edicionMode = true;
-    $id_note = $_GET['editar'];
-    $currentNote = $noteController->getNote($user->getIdUser(), $id_note);
-}
-
-if( isset($_GET['do_edicion']) ) {
-    $id_note = $_POST['id_note'];
-    $data = [
-        'title' => $_POST['title'],
-        'description' => $_POST['description'],
-    ];
-    $noteController->updateNote($id_note, $data);
-}
-
-if( isset($_GET['agregar']) ) {
-    
-    $data = [
-        'title' => $_POST['title'],
-        'description' => $_POST['description'],
-    ];
-    $noteController->postNote($user->getIdUser(), $data);
-}
+    session_start();
+    require_once '../Models/User.php';
+    require_once '../Models/Note.php';
+    require_once '../Controllers/NoteController.php';
+    require_once '../Repositories/NoteRepository.php';
 
 
-if( $user->getRole() == 'admin') {
-    header('refresh:0;url=dashboard.php');
-    exit();
-}
+    if( !isset($_SESSION['user']) ) {
+        echo 'Acceso denegado, serás redirigido en 3 segundos...';
+        header('refresh:3;url=login.php');
+        exit;
+    }
+
+    $user = unserialize( $_SESSION['user'] );
 
 
-$titulo = 'Tus notas';
-require_once '../Templates/header.php'; 
-$foto = $user->getPic();
-$nombre = $user->getName() . ' ' . $user->getLastName();
-$rol = $user->getRole();
-$link = 2;
-require_once '../Templates/sidebar.php'
+    $noteController = new NoteController();
+
+    $edicionMode = false;
+
+    $currentNote = null;
+
+    if( isset($_GET['editar']) ) {
+        $edicionMode = true;
+        $id_note = $_GET['editar'];
+        $currentNote = $noteController->getNote($user->getIdUser(), $id_note);
+    }
+
+    if( isset($_GET['do_edicion']) ) {
+        $id_note = $_POST['id_note'];
+        $data = [
+            'title' => $_POST['title'],
+            'description' => $_POST['description'],
+        ];
+        $noteController->updateNote($id_note, $data);
+    }
+
+    if( isset($_GET['agregar']) ) {
+        
+        $data = [
+            'title' => $_POST['title'],
+            'description' => $_POST['description'],
+        ];
+        $noteController->postNote($user->getIdUser(), $data);
+    }
+
+
+    if( $user->getRole() == 'admin') {
+        header('refresh:0;url=dashboard.php');
+        exit();
+    }
+
+
+    $titulo = 'Tus notas';
+    require_once '../Templates/header.php'; 
+    $foto = $user->getPic();
+    $nombre = $user->getName() . ' ' . $user->getLastName();
+    $rol = $user->getRole();
+    $link = 2;
+    require_once '../Templates/sidebar.php'
 ?>
 
 

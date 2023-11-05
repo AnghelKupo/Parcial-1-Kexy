@@ -1,28 +1,24 @@
 <?php 
-session_start();
-require_once '../Models/User.php';
+    session_start();
+    require_once '../Models/User.php';
 
-if( !isset($_SESSION['user']) ) {
-    /* echo 'Acceso denegado, serás redirigido en 3 segundos...';
-    header('refresh:3;url=login.php');
-    exit; */
-}
+    if( !isset($_SESSION['user']) ) {
+        echo 'Acceso denegado, serás redirigido en 3 segundos...';
+        header('refresh:3;url=login.php');
+        exit;
+    }
 
-/* $user = unserialize( $_SESSION['user'] ); */
-$user = new User();
-$user->setRole('user');
-$user->setName('Flavio');
-$user->setLastName('Sánchez');
-$user->setEmail('test@test.com');
+    $user = unserialize( $_SESSION['user'] ); 
+  
 
-$titulo = 'Configurar datos';
-require_once '../Templates/header.php'; 
+    $titulo = 'Configurar datos';
+    require_once '../Templates/header.php'; 
 
-$foto = null;
-$nombre = $user->getName() . ' ' . $user->getLastName();
-$rol = $user->getRole();
-$link = 3;
-require_once '../Templates/sidebar.php'
+    $foto = $user->getPic();
+    $nombre = $user->getName() . ' ' . $user->getLastName();
+    $rol = $user->getRole();
+    $link = 3;
+    require_once '../Templates/sidebar.php'
 ?>
 
 

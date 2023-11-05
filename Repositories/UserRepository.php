@@ -88,22 +88,15 @@ class UserRepository {
 
     public function insertUser(array $data): bool {
         $connection = ConnectionDB::getInstance()->getConnection();
-        $sql = "INSERT INTO users ( email, pass, pic, name, last_name, role) VALUES(:id_user, ::email, :pass, :pic, :name, :last_name, :role)";
+        $sql = "INSERT INTO users ( email, pass, name, last_name) VALUES(:email, :pass, :name, :last_name)";
         try {
             $stmt = $connection->prepare($sql);
-            $hash_password = password_hash($data["password"], PASSWORD_DEFAULT);
+            $hash_password = password_hash($data["pass"], PASSWORD_DEFAULT);
 
             $stmt->bindParam("email", $data["email"]);
-            $stmt->bindParam("password", $hash_password);
+            $stmt->bindParam("pass", $hash_password);
             $stmt->bindParam("name", $data["name"]);
             $stmt->bindParam("last_name", $data["last_name"]);
-            $stmt->bindParam("role", $data["role"]);
-
-            if (isset($data["pic"])) {
-                $stmt->bindParam(':pic', $data["pic"], PDO::PARAM_LOB);
-            } else {
-                $stmt->bindValue(':pic', null, PDO::PARAM_NULL);
-            }
 
             if ($stmt->execute()) {
                 return true;
@@ -116,6 +109,7 @@ class UserRepository {
         }
 
     }
+    
 
     public function deleteUserById(int $id_user): bool {
         $connection = ConnectionDB::getInstance()->getConnection();
