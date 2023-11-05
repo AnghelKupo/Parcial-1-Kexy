@@ -1,5 +1,6 @@
 <?php 
 
+require_once '../Models/User.php';
 
 if( isset($_GET['login']) ) { 
     
