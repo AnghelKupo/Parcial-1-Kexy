@@ -1,6 +1,10 @@
 <?php 
 session_start();
 require_once '../Models/User.php';
+require_once '../Models/Note.php';
+require_once '../Repositories/NoteRepository.php';
+
+// =========================
 
 if( !isset($_SESSION['user']) ) {
     /* echo 'Acceso denegado, serás redirigido en 3 segundos...';
@@ -13,6 +17,8 @@ $user = new User();
 $user->setRole('admin');
 $user->setName('Flavio');
 $user->setLastName('Sánchez');
+
+// =========================
 
 if( $user->getRole() != 'admin') {
     header('refresh:0;url=dashboard.php');
@@ -41,20 +47,27 @@ require_once '../Templates/sidebar.php'
                 <th class="border-8 border-purple-500 p-2 text-start">Propietario</th>
                 <th class="border-8 border-purple-500 p-2 text-start">Acciones</th>
             </tr>
-            <tr class="bg-purple-200 bg-opacity-50 backdrop-blur-lg">
-                <td class="border-8 border-purple-500 p-2 text-start">12/05/2020</td>
-                <td class="border-8 border-purple-500 p-2 text-start" contenteditable="true">Hacer la tarea</td>
-                <td class="border-8 border-purple-500 p-2 text-start" contenteditable="true">Flavio Sánchez</td>
-                <td class="border-8 border-purple-500 p-2 text-start">
-                    <button class="w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full">E</button>
-                </td>
-            </tr>
+            <?php
+            $noteRepository = new NoteRepository();
+            $notes = $noteRepository->getAll();
+            foreach( $notes as $note ) {
+                echo "<tr class='bg-purple-200 bg-opacity-50 backdrop-blur-lg'>";
+                echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getDate()."</td>";
+                echo "<td class='border-8 border-purple-500 p-2 text-start' contenteditable='true'>".$note->getTitle()."</td>";
+                echo "<td class='border-8 border-purple-500 p-2 text-start' contenteditable='true'>".$note->getUser()->getName().' '.$note->getUser()->getLastName()."</td>";
+                echo "<td class='border-8 border-purple-500 p-2 text-start'>";
+                echo "<button onclick='deleteNote(".$note->getId().")' class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>E</button>";
+                echo "</td>";
+                echo "</tr>";
+            }
+            ?>
         </table>
 
     </section>
 
 </main>
 
+<script src="../Public/js/delete-note.js"></script>
 
 <?php
 require '../Templates/footer.php'; 

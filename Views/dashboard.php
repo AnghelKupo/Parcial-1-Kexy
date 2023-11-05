@@ -10,7 +10,8 @@ if( !isset($_SESSION['user']) ) {
 
 /* $user = unserialize( $_SESSION['user'] ); */
 $user = new User();
-$user->setRole('admin');
+$user->setIdUser(1);
+$user->setRole('user');
 $user->setName('Flavio');
 $user->setLastName('Sánchez');
 
@@ -39,6 +40,10 @@ require_once '../Templates/sidebar.php'
                     <th class="border-8 border-purple-500 p-2 text-start">Número de notas</th>
                     <th class="border-8 border-purple-500 p-2 text-start">Acciones</th>
                 </tr>
+                <?php
+                
+
+                ?>
                 <tr class="bg-purple-200 bg-opacity-50 backdrop-blur-lg">
                     <td class="border-8 border-purple-500 p-2 text-start">
                         <img src="../Public/perfil.jpg" alt="user" class="w-8 h-8 rounded-full">
