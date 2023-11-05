@@ -49,7 +49,7 @@
                     echo "<tr class='bg-purple-200 bg-opacity-50 backdrop-blur-lg'>";
                     echo "<td class='border-8 border-purple-500 p-2 text-start'>";
                     if(!is_null($user->getPic())) { 
-                        echo "<img src='data:image/jpeg;base64,". $user->getPic() ."' alt='Perfil' class='rounded-full w-12 h-12 ring-purple-400 ring-8'>";
+                        echo "<img src='data:image/jpeg;base64,". base64_encode($user->getPic()) ."' alt='Perfil' class='rounded-full w-12 h-12 ring-purple-400 ring-8'>";
                     } else { 
                         echo "<img src='../Public/perfil.jpg' alt='Perfil' class='rounded-full w-12 h-12 ring-purple-400 ring-8'>";
                     }

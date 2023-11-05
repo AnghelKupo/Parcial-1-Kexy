@@ -35,9 +35,7 @@
                     'pic' =>file_get_contents($archivo_tmp)
                 );
                 $authController->pic($user->getIdUser(), $resultArray);
-
             }
-
         }
 
     $titulo = 'Configurar datos';
@@ -54,7 +52,7 @@
 <main class="flex-col ml-[224px] p-4 flex justify-center" style="width: calc(100vw - 224px);">
 
     <div class="bg-purple-300 bg-opacity-40 border-2 border-fuchsia-100 backdrop-blur-xl p-4 rounded-3xl w-[800px]">   
-        <form action="./dashboard-config.php?editar_foto=" class="" method="post">
+        <form enctype="multipart/form-data" action="./dashboard-config.php?editar_foto=" class="" method="post">
             <input type="file" name="pic" id="">
             <button class="block px-4 py-2 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-3xl mx-auto" type="submit">Subir foto</button>
         </form>

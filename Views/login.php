@@ -11,7 +11,7 @@ if( isset($_GET['login']) ) {
         $pass = $_POST['pass'];
         
         if (!empty($email) && !empty($pass)) {
-            $controllerUser->login($email, $pass);
+            $authController->login($email, $pass);
 
         }
 
