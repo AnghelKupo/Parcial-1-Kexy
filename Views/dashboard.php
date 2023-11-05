@@ -1,6 +1,8 @@
 <?php 
 session_start();
 require_once '../Models/User.php';
+require_once '../Repositories/UserRepository.php';
+require_once '../Repositories/NoteRepository.php';
 
 if( !isset($_SESSION['user']) ) {
     /* echo 'Acceso denegado, serás redirigido en 3 segundos...';
@@ -14,6 +16,9 @@ $user->setIdUser(1);
 $user->setRole('user');
 $user->setName('Flavio');
 $user->setLastName('Sánchez');
+
+$userRepository = new UserRepository();
+$noteRepository = new NoteRepository();
 
 
 $titulo = 'Tus notas';
@@ -37,25 +42,42 @@ require_once '../Templates/sidebar.php'
                     <th class="border-8 border-purple-500 p-2 text-start">Foto</th>
                     <th class="border-8 border-purple-500 p-2 text-start">Nombre <span class="text-cyan-500">Editable</span></th>
                     <th class="border-8 border-purple-500 p-2 text-start">Apellido <span class="text-cyan-500">Editable</span></th>
+                    <th class="border-8 border-purple-500 p-2 text-start">Email</th>
                     <th class="border-8 border-purple-500 p-2 text-start">Número de notas</th>
                     <th class="border-8 border-purple-500 p-2 text-start">Acciones</th>
                 </tr>
                 <?php
-                
+                $users = $userRepository->getAll();
 
+                foreach( $users as $user ) {
+                    echo "<tr class='bg-purple-200 bg-opacity-50 backdrop-blur-lg'>";
+                    echo "<td class='border-8 border-purple-500 p-2 text-start'>";
+                    if(!is_null($user->getPic())) { 
+                        echo "<img src='data:image/jpeg;base64,". $user->getPic() ."' alt='Perfil' class='rounded-full w-12 h-12 ring-purple-400 ring-8'>";
+                    } else { 
+                        echo "<img src='../Public/perfil.jpg' alt='Perfil' class='rounded-full w-12 h-12 ring-purple-400 ring-8'>";
+                    }
+                    echo "</td>";
+
+                    $editable = $user->getRole() != 'admin';
+
+                    echo "<td class='border-8 border-purple-500 p-2 text-start' contenteditable>".$user->getName()."</td>";
+                    echo "<td class='border-8 border-purple-500 p-2 text-start' contenteditable>".$user->getLastName()."</td>";
+                    echo "<td class='border-8 border-purple-500 p-2 text-start' contenteditable>".$user->getEmail()."</td>";
+
+                    $notes = $noteRepository->getAllByUserId( $user->getIdUser() );
+                    echo "<td class='border-8 border-purple-500 p-2 text-start'>".count($notes)."</td>";
+
+                    echo "<td class='border-8 border-purple-500 p-2 text-start'>";
+
+                    if($editable) {
+                        echo "<button class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>M</button>";
+                        echo "<button class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>E</button>";
+                    }
+                    echo "</td>";
+                    echo "</tr>";
+                }
                 ?>
-                <tr class="bg-purple-200 bg-opacity-50 backdrop-blur-lg">
-                    <td class="border-8 border-purple-500 p-2 text-start">
-                        <img src="../Public/perfil.jpg" alt="user" class="w-8 h-8 rounded-full">
-                    </td>
-                    <td class="border-8 border-purple-500 p-2 text-start" contenteditable="true">Flavio</td>
-                    <td class="border-8 border-purple-500 p-2 text-start" contenteditable="true">Sánchez</td>
-                    <td class="border-8 border-purple-500 p-2 text-start">20</td>
-                    <td class="border-8 border-purple-500 p-2 text-start">
-                        <button class="w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full">M</button>
-                        <button class="w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full">E</button>
-                    </td>
-                </tr>
             </table>
 
         </section>
@@ -72,15 +94,22 @@ require_once '../Templates/sidebar.php'
                     <th class="border-8 border-purple-500 p-2 text-start">Contenido</th>
                     <th class="border-8 border-purple-500 p-2 text-start">Acciones</th>
                 </tr>
-                <tr class="bg-purple-200 bg-opacity-50 backdrop-blur-lg">
-                    <td class="border-8 border-purple-500 p-2 text-start">02/11/2020</td>
-                    <td class="border-8 border-purple-500 p-2 text-start">Hacer la tarea</td>
-                    <td class="border-8 border-purple-500 p-2 text-start">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem quod eius blanditiis iste similique repellendus in, nesciunt eum perspiciatis dicta?</td>
-                    <td class="border-8 border-purple-500 p-2 text-start">
-                        <button class="w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full">M</button>
-                        <button class="w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full">E</button>
-                    </td>
-                </tr>
+                <?php
+                $notes = $noteRepository->getAllByUserId( $user->getIdUser() );
+                foreach( $notes as $note ) {
+
+                    echo "<tr class='bg-purple-200 bg-opacity-50 backdrop-blur-lg'>";
+                    echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getDate()."</td>";
+                    echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getTitle()."</td>";
+                    echo "<td class='border-8 border-purple-500 p-2 text-start'>".$note->getDescription()."</td>";
+                    echo "<td class='border-8 border-purple-500 p-2 text-start'>";
+                    echo "<button class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'><a href='./dashboard-agregar-editar.php?editar=".$note->getId()."'>M</a></button>";
+                    echo "<button class='w-8 h-8 text-slate-100 font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-lg rounded-full'>E</button>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                
+                ?>
             </table>
 
         </section>
